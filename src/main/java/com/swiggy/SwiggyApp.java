@@ -12,20 +12,46 @@ public class SwiggyApp {
 
         HttpServer server = HttpServer.create(new InetSocketAddress(9090), 0);
 
+        // Home Page
         server.createContext("/", (HttpExchange exchange) -> {
             String response = """
                     <html>
-                    <head><title>Swiggy App</title></head>
+                    <head>
+                        <title>Swiggy App</title>
+                    </head>
                     <body>
                         <h1>Welcome to Swiggy</h1>
-                        <h3>Menu</h3>
+                        <h2>Menu</h2>
                         <ul>
-                            <li>1. Chicken Biryani - ₹250</li>
-                            <li>2. Veg Fried Rice - ₹150</li>
-                            <li>3. Pizza - ₹300</li>
-                            <li>4. Burger - ₹120</li>
+                            <li>Chicken Biryani - ₹250 <a href="/order?item=Biryani">Order</a></li>
+                            <li>Pizza - ₹300 <a href="/order?item=Pizza">Order</a></li>
+                            <li>Burger - ₹120 <a href="/order?item=Burger">Order</a></li>
                         </ul>
-                        <h3>Order Placed Successfully!</h3>
+                    </body>
+                    </html>
+                    """;
+
+            exchange.sendResponseHeaders(200, response.length());
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        });
+
+        // Order Page
+        server.createContext("/order", (HttpExchange exchange) -> {
+            String query = exchange.getRequestURI().getQuery();
+            String item = "Item";
+
+            if (query != null && query.startsWith("item=")) {
+                item = query.substring(5);
+            }
+
+            String response = """
+                    <html>
+                    <body>
+                        <h1>Order Successful!</h1>
+                        <p>You ordered: """ + item + """</p>
+                        <a href="/">Go Back</a>
                     </body>
                     </html>
                     """;
@@ -38,6 +64,7 @@ public class SwiggyApp {
 
         server.setExecutor(null);
         server.start();
-        System.out.println("Swiggy Application Running on Port 9090");
+
+        System.out.println("Swiggy Web App running on port 9090");
     }
 }

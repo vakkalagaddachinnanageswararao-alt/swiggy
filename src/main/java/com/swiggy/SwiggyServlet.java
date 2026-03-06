@@ -24,7 +24,6 @@ public class SwiggyServlet extends HttpServlet {
         out.println("<li>Fried Rice - ₹179</li>");
         out.println("<li>Noodles - ₹159</li>");
         out.println("<li>Chicken Roll - ₹129</li>");
-        out.println("<li>Paneer Butter Masala - ₹229</li>");
         out.println("<li>Butter Naan - ₹40</li>");
         out.println("<li>Cold Drink - ₹50</li>");
         out.println("<li>Ice Cream - ₹80</li>");

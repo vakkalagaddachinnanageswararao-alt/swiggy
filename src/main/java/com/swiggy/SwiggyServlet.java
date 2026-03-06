@@ -14,7 +14,7 @@ public class SwiggyServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
        out.println("<html><body>");
-        out.println("<h1>Welcome to Mango Sai Server</h1>");
+        out.println("<h1>Welcome to Food restuant </h1>");
         out.println("<h2>Swiggy Food Menu</h2>");
         out.println("<ul>");
         out.println("<li>Pizza - ₹199</li>");
